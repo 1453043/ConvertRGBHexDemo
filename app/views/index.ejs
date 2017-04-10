@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hex-RGB Converter</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+<body class="container">
+	<div class="row">
+	<%
+		var r = 0, g = 0, b = 0, h = 0;
+		if(val != undefined){
+			var obj = JSON.parse(val);
+			r = obj.red;
+			g = obj.green;
+			b = obj.blue;
+			h = obj.hex;
+		}
+	%>
+		<form action="/rgbToHex" method="get">
+			<h3>RGB to Hex</h3>
+			<label for="red">Red</label>
+			<input type="number" min="0" max="255" id="red" name="red" class="form-control" value="<%=r %>" required autofocus>
+			<label for="green">Green</label>
+			<input type="number" min="0" max="255" id="green" name="green" class="form-control" value="<%=g %>" required>
+			<label for="blue">Blue</label>
+			<input type="number" min="0" max="255" id="blue" name="blue" class="form-control" value="<%=b %>" required>
+			<input name="button" class="btn btn-default" type="submit" value="Convert">
+		</form>
+	</div>
+	<div class="row" style="padding: 5px 0;">
+		<label for="cvhex">Converted Hex</label>
+		<input type="text" id="cvhex" name="cvhex" class="form-control" value="<%=h %>" readonly>
+	</div>
+
+	<div class="row">
+		<%
+		var hex = 0, rgb = '[0, 0, 0]';
+		if(val2 != undefined){
+			var obj = JSON.parse(val2);
+			rgb = obj.rgb;
+			hex = obj.hex;
+		}
+		%>
+		<form action="/hexToRgb" method="get">
+			<h3>Hex to RGB</h3>
+			<label for="hex">Hex Value</label>
+			<input type="text" id="hex" name="hex" class="form-control" value="<%=hex %>" required>
+			<input name="button" class="btn btn-default" type="submit" value="Convert">
+		</form>
+	</div>
+	<div class="row" style="padding: 5px 0;">
+		<label for="cvrgb">Converted RGB</label>
+		<input type="text" id="cvrgb" name="cvrgb" class="form-control" value="<%=rgb %>" readonly>
+	</div>
+
+</body>
+</html>
